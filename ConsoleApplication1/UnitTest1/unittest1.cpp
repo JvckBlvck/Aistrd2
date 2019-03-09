@@ -33,6 +33,58 @@ namespace UnitTest1
 			array2[4] = 'e';
 			Assert::IsTrue(equal_arrays(array1, 5, array2, 5));
 		}
+		TEST_METHOD(insert_int_size_1)
+		{
+			tree<int> mytree;
+			mytree.insert(13, 13);
+			int*array1data = new int[1];
+			array1data[0] = 13;
+			size_t*array1key = new size_t[1];
+			array1key[0] = 13;
+			char*array1color = new char[1];
+			array1color[0] = 'b';
+			int*array2data = new int[1];
+			size_t*array2key = new size_t[1];
+			char*array2color = new char[1];
+			size_t i = 0;
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 1, array2key, 1) && equal_arrays(array1color, 1, array2color, 1) && equal_arrays(array1data, 1, array2data, 1));
+		}
+		TEST_METHOD(insert_int_size_2)
+		{
+			tree<int> mytree;
+			mytree.insert(13, 13);
+			mytree.insert(8, 8);
+			int*array1data = new int[2];
+			array1data[0] = 13;
+			array1data[1] = 8;
+			size_t*array1key = new size_t[2];
+			array1key[0] = 13;
+			array1key[1] = 8;
+			char*array1color = new char[2];
+			array1color[0] = 'b';
+			array1color[1] = 'r';
+			size_t i = 0;
+			int*array2data = new int[2];
+			size_t*array2key = new size_t[2];
+			char*array2color = new char[2];
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 2, array2key, 2) && equal_arrays(array1color, 2, array2color, 2) && equal_arrays(array1data, 2, array2data, 2));
+		}
 		TEST_METHOD(insert_int_size_3)
 		{
 			tree<int> mytree;
@@ -54,7 +106,7 @@ namespace UnitTest1
 			size_t i = 0;
 			int*array2data = new int[3];
 			size_t*array2key = new size_t[3];
-			char*array2color = new char[4];
+			char*array2color = new char[3];
 			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
 				if (tmp->current_color() != 'n')
 				{
@@ -101,44 +153,36 @@ namespace UnitTest1
 				}
 			Assert::IsTrue(equal_arrays(array1key, 4, array2key, 4) && equal_arrays(array1color, 4, array2color, 4) && equal_arrays(array1data, 4, array2data, 4));
 		}
-		TEST_METHOD(inseret_int_size_7)
+		TEST_METHOD(inseret_int_size_5)
 		{
 			tree<int> mytree;
 			mytree.insert(13, 13);
-			mytree.insert(9, 9);
-			mytree.insert(15, 15);
 			mytree.insert(8, 8);
-			mytree.insert(10, 10);
-			mytree.insert(12, 12);
-			mytree.insert(11, 11);
-			int*array1data = new int[7];
+			mytree.insert(17, 17);
+			mytree.insert(18, 18);
+			mytree.insert(19, 19);
+			int*array1data = new int[5];
 			array1data[0] = 13;
-			array1data[1] = 9;
-			array1data[2] = 15;
-			array1data[3] = 8;
-			array1data[4] = 11;
-			array1data[5] = 10;
-			array1data[6] = 12;
-			size_t*array1key = new size_t[7];
+			array1data[1] = 8;
+			array1data[2] = 18;
+			array1data[3] = 17;
+			array1data[4] = 19;
+			size_t*array1key = new size_t[5];
 			array1key[0] = 13;
-			array1key[1] = 9;
-			array1key[2] = 15;
-			array1key[3] = 8;
-			array1key[4] = 11;
-			array1key[5] = 10;
-			array1key[6] = 12;
-			char*array1color = new char[7];
+			array1key[1] = 8;
+			array1key[2] = 18;
+			array1key[3] = 17;
+			array1key[4] = 19;
+			char*array1color = new char[5];
 			array1color[0] = 'b';
-			array1color[1] = 'r';
+			array1color[1] = 'b';
 			array1color[2] = 'b';
-			array1color[3] = 'b';
-			array1color[4] = 'b';
-			array1color[5] = 'r';
-			array1color[6] = 'r';
+			array1color[3] = 'r';
+			array1color[4] = 'r';
 			size_t i = 0;
-			int*array2data = new int[7];
-			size_t*array2key = new size_t[7];
-			char*array2color = new char[7];
+			int*array2data = new int[5];
+			size_t*array2key = new size_t[5];
+			char*array2color = new char[5];
 			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
 				if (tmp->current_color() != 'n')
 				{
@@ -147,7 +191,7 @@ namespace UnitTest1
 					array2color[i] = tmp->current_color();
 					i++;
 				}
-			Assert::IsTrue(equal_arrays(array1key, 7, array2key, 7) && equal_arrays(array1color, 7, array2color, 7) && equal_arrays(array1data, 7, array2data, 7));
+			Assert::IsTrue(equal_arrays(array1key, 5, array2key, 5) && equal_arrays(array1color, 5, array2color, 5) && equal_arrays(array1data, 5, array2data, 5));
 		}
 		TEST_METHOD(remove_char_head)
 		{
@@ -159,6 +203,32 @@ namespace UnitTest1
 			array1data[0] = 'b';
 			size_t*array1key = new size_t[1];
 			array1key[0] = 9;
+			char*array1color = new char[1];
+			array1color[0] = 'b';
+			size_t i = 0;
+			char*array2data = new char[1];
+			size_t*array2key = new size_t[1];
+			char*array2color = new char[1];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 1, array2key, 1) && equal_arrays(array1color, 1, array2color, 1) && equal_arrays(array1data, 1, array2data, 1));
+		}
+		TEST_METHOD(remove_char_size_2)
+		{
+			tree<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.remove(9);
+			char*array1data = new char[1];
+			array1data[0] = 'a';
+			size_t*array1key = new size_t[1];
+			array1key[0] = 13;
 			char*array1color = new char[1];
 			array1color[0] = 'b';
 			size_t i = 0;
@@ -213,7 +283,297 @@ namespace UnitTest1
 				}
 			Assert::IsTrue(equal_arrays(array1key, 4, array2key, 4) && equal_arrays(array1color, 4, array2color, 4) && equal_arrays(array1data, 4, array2data, 4));
 		}
-		TEST_METHOD(remove_many_nodes_char)
+		TEST_METHOD(remove_1_from_11_nodes_char)
+		{
+			tree<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			char*array1data = new char[10];
+			array1data[0] = 'c';
+			array1data[1] = 'b';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			array1data[7] = 'f';
+			array1data[8] = 'i';
+			array1data[9] = 'l';
+			size_t*array1key = new size_t[10];
+			array1key[0] = 12;
+			array1key[1] = 9;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11; 
+			array1key[5] = 13;
+			array1key[6] = 23;
+			array1key[7] = 7;
+			array1key[8] = 19;
+			array1key[9] = 6;
+			char*array1color = new char[10];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			array1color[7] = 'b';
+			array1color[8] = 'r';
+			array1color[9] = 'r';
+			size_t i = 0;
+			char*array2data = new char[10];
+			size_t*array2key = new size_t[10];
+			char*array2color = new char[10];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 10, array2key, 10) && equal_arrays(array1color, 10, array2color, 10)); //&& equal_arrays(array1data, 10, array2data, 10));
+		}
+		TEST_METHOD(remove_2_from_11_nodes_char)
+		{
+			tree<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			char*array1data = new char[9];
+			array1data[0] = 'c';
+			array1data[1] = 'f';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			array1data[7] = 'l';
+			array1data[8] = 'i';
+			size_t*array1key = new size_t[9];
+			array1key[0] = 12;
+			array1key[1] = 7;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			array1key[6] = 23;
+			array1key[7] = 6;
+			array1key[8] = 19;
+			char*array1color = new char[9];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			array1color[7] = 'r';
+			array1color[8] = 'r';
+			size_t i = 0;
+			char*array2data = new char[9];
+			size_t*array2key = new size_t[9];
+			char*array2color = new char[9];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 9, array2key, 9) && equal_arrays(array1color, 9, array2color, 9) && equal_arrays(array1data, 9, array2data, 9));
+		}
+		TEST_METHOD(remove_3_from_11_nodes_char)
+		{
+			tree<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			char*array1data = new char[8];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			array1data[7] = 'i';
+			size_t*array1key = new size_t[8];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			array1key[6] = 23;
+			array1key[7] = 19;
+			char*array1color = new char[8];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			array1color[7] = 'r';
+			size_t i = 0;
+			char*array2data = new char[8];
+			size_t*array2key = new size_t[8];
+			char*array2color = new char[8];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 8, array2key, 8) && equal_arrays(array1color, 8, array2color, 8) && equal_arrays(array1data, 8, array2data, 8));
+		}
+		TEST_METHOD(remove_4_from_11_nodes_char)
+		{
+			tree<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			mytree.remove(19);
+			char*array1data = new char[7];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			size_t*array1key = new size_t[7];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			array1key[6] = 23;
+			char*array1color = new char[7];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			size_t i = 0;
+			char*array2data = new char[7];
+			size_t*array2key = new size_t[7];
+			char*array2color = new char[7];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 7, array2key, 7) && equal_arrays(array1color, 7, array2color, 7) && equal_arrays(array1data, 7, array2data, 7));
+		}
+		TEST_METHOD(remove_5_from_11_nodes_char)
+		{
+			tree<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			mytree.remove(19);
+			mytree.remove(23);
+			char*array1data = new char[6];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			size_t*array1key = new size_t[6];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			char*array1color = new char[6];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			size_t i = 0;
+			char*array2data = new char[6];
+			size_t*array2key = new size_t[6];
+			char*array2color = new char[6];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 6, array2key, 6) && equal_arrays(array1color, 6, array2color, 6) && equal_arrays(array1data, 6, array2data, 6));
+		}
+		TEST_METHOD(remove_6_from_11_nodes_char)
 		{
 			tree<char> mytree;
 			mytree.insert(13, 'a');

@@ -24,20 +24,18 @@ int main()
 	mytree.remove(7);
 	mytree.remove(19);
 	mytree.remove(23);
-	mytree.remove(11);
-	//mytree.clear();
 	for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
 	if (tmp->current_color() != 'n')
 			cout << tmp->current_key() << " ";
 	cout << "\n";
 	for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
 		if (tmp->current_color() != 'n')
+			cout << tmp->current_data() << " ";
+	cout << "\n";
+	for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+		if (tmp->current_color() != 'n')
 			cout << tmp->current_color() << " ";
 	cout << "\n";
-	//list<size_t> mylist = mytree.get_keys();
-	//mylist.print();
-	list<char> mylist1 = mytree.get_values();
-	mylist1.print();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
