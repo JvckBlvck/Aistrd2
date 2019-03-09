@@ -1,858 +1,720 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../ConsoleApplication2/list.h"
-#include "../ConsoleApplication2/equal.h"
+#include "../ConsoleApplication1/equal.h"
+#include "../ConsoleApplication1/map.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1
-{
+{		
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-
-		TEST_METHOD(get_size_int_0)
+		
+		TEST_METHOD(equal_arrays_int_size_0)
 		{
-			size_t size1 = 0;
-			list<int> list1;
-			list1.get_size(&size1);
-			size_t size2 = 0;
-			Assert::AreEqual(size1, size2);
+			int*array1 = new int[0];
+			int*array2 = new int[0];
+			Assert::IsTrue(equal_arrays(array1, 0, array2, 0));
 		}
-		TEST_METHOD(get_size_int_3)
+		TEST_METHOD(equal_arrays_char_size_5)
 		{
-			size_t size1 = 0;
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(1);
-			list1.push_back(1);
-			list1.get_size(&size1);
-			size_t size2 = 3;
-			Assert::AreEqual(size1, size2);
+			int*array1 = new int[5];
+			array1[0] = 'a';
+			array1[1] = 'b';
+			array1[2] = 'c';
+			array1[3] = 'd';
+			array1[4] = 'e';
+			int*array2 = new int[5];
+			array2[0] = 'a';
+			array2[1] = 'b';
+			array2[2] = 'c';
+			array2[3] = 'd';
+			array2[4] = 'e';
+			Assert::IsTrue(equal_arrays(array1, 5, array2, 5));
 		}
-		TEST_METHOD(get_size_double_0)
+		TEST_METHOD(insert_int_size_1)
 		{
-			size_t size1 = 0;
-			list<double> list1;
-			list1.get_size(&size1);
-			size_t size2 = 0;
-			Assert::AreEqual(size1, size2);
+			map<int> mytree;
+			mytree.insert(13, 13);
+			int*array1data = new int[1];
+			array1data[0] = 13;
+			size_t*array1key = new size_t[1];
+			array1key[0] = 13;
+			char*array1color = new char[1];
+			array1color[0] = 'b';
+			int*array2data = new int[1];
+			size_t*array2key = new size_t[1];
+			char*array2color = new char[1];
+			size_t i = 0;
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 1, array2key, 1) && equal_arrays(array1color, 1, array2color, 1) && equal_arrays(array1data, 1, array2data, 1));
 		}
-		TEST_METHOD(get_size_double_3)
+		TEST_METHOD(insert_int_size_2)
 		{
-			size_t size1 = 0;
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(1.7);
-			list1.push_back(1.7);
-			list1.get_size(&size1);
-			size_t size2 = 3;
-			Assert::AreEqual(size1, size2);
+			map<int> mytree;
+			mytree.insert(13, 13);
+			mytree.insert(8, 8);
+			int*array1data = new int[2];
+			array1data[0] = 13;
+			array1data[1] = 8;
+			size_t*array1key = new size_t[2];
+			array1key[0] = 13;
+			array1key[1] = 8;
+			char*array1color = new char[2];
+			array1color[0] = 'b';
+			array1color[1] = 'r';
+			size_t i = 0;
+			int*array2data = new int[2];
+			size_t*array2key = new size_t[2];
+			char*array2color = new char[2];
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 2, array2key, 2) && equal_arrays(array1color, 2, array2color, 2) && equal_arrays(array1data, 2, array2data, 2));
 		}
-		TEST_METHOD(get_size_char_0)
+		TEST_METHOD(insert_int_size_3)
 		{
-			size_t size1 = 0;
-			list<char> list1;
-			list1.get_size(&size1);
-			size_t size2 = 0;
-			Assert::AreEqual(size1, size2);
+			map<int> mytree;
+			mytree.insert(13, 13);
+			mytree.insert(8, 8);
+			mytree.insert(17, 17);
+			int*array1data = new int[3];
+			array1data[0] = 13;
+			array1data[1] = 8;
+			array1data[2] = 17;
+			size_t*array1key = new size_t[3];
+			array1key[0] = 13;
+			array1key[1] = 8;
+			array1key[2] = 17;
+			char*array1color = new char[3];
+			array1color[0] = 'b';
+			array1color[1] = 'r';
+			array1color[2] = 'r';
+			size_t i = 0;
+			int*array2data = new int[3];
+			size_t*array2key = new size_t[3];
+			char*array2color = new char[3];
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 3, array2key, 3) && equal_arrays(array1color, 3, array2color, 3) && equal_arrays(array1data, 3, array2data, 3));
 		}
-		TEST_METHOD(get_size_char_3)
+		TEST_METHOD(inseret_int_size_4)
 		{
-			size_t size1 = 0;
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('a');
-			list1.push_back('a');
-			list1.get_size(&size1);
-			size_t size2 = 3;
-			Assert::AreEqual(size1, size2);
+			map<int> mytree;
+			mytree.insert(13, 13);
+			mytree.insert(8, 8);
+			mytree.insert(17, 17);
+			mytree.insert(18, 18);
+			int*array1data = new int[4];
+			array1data[0] = 13;
+			array1data[1] = 8;
+			array1data[2] = 17;
+			array1data[3] = 18;
+			size_t*array1key = new size_t[4];
+			array1key[0] = 13;
+			array1key[1] = 8;
+			array1key[2] = 17;
+			array1key[3] = 18;
+			char*array1color = new char[4];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			size_t i = 0;
+			int*array2data = new int[4];
+			size_t*array2key = new size_t[4];
+			char*array2color = new char[4];
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 4, array2key, 4) && equal_arrays(array1color, 4, array2color, 4) && equal_arrays(array1data, 4, array2data, 4));
 		}
-		TEST_METHOD(at_int_head)
+		TEST_METHOD(inseret_int_size_5)
 		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			int data;
+			map<int> mytree;
+			mytree.insert(13, 13);
+			mytree.insert(8, 8);
+			mytree.insert(17, 17);
+			mytree.insert(18, 18);
+			mytree.insert(19, 19);
+			int*array1data = new int[5];
+			array1data[0] = 13;
+			array1data[1] = 8;
+			array1data[2] = 18;
+			array1data[3] = 17;
+			array1data[4] = 19;
+			size_t*array1key = new size_t[5];
+			array1key[0] = 13;
+			array1key[1] = 8;
+			array1key[2] = 18;
+			array1key[3] = 17;
+			array1key[4] = 19;
+			char*array1color = new char[5];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'r';
+			size_t i = 0;
+			int*array2data = new int[5];
+			size_t*array2key = new size_t[5];
+			char*array2color = new char[5];
+			for (Iterator<int> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 5, array2key, 5) && equal_arrays(array1color, 5, array2color, 5) && equal_arrays(array1data, 5, array2data, 5));
+		}
+		TEST_METHOD(remove_char_head)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.remove(13);
+			char*array1data = new char[1];
+			array1data[0] = 'b';
+			size_t*array1key = new size_t[1];
+			array1key[0] = 9;
+			char*array1color = new char[1];
+			array1color[0] = 'b';
+			size_t i = 0;
+			char*array2data = new char[1];
+			size_t*array2key = new size_t[1];
+			char*array2color = new char[1];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 1, array2key, 1) && equal_arrays(array1color, 1, array2color, 1) && equal_arrays(array1data, 1, array2data, 1));
+		}
+		TEST_METHOD(remove_char_size_2)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.remove(9);
+			char*array1data = new char[1];
+			array1data[0] = 'a';
+			size_t*array1key = new size_t[1];
+			array1key[0] = 13;
+			char*array1color = new char[1];
+			array1color[0] = 'b';
+			size_t i = 0;
+			char*array2data = new char[1];
+			size_t*array2key = new size_t[1];
+			char*array2color = new char[1];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 1, array2key, 1) && equal_arrays(array1color, 1, array2color, 1) && equal_arrays(array1data, 1, array2data, 1));
+		}
+		TEST_METHOD(remove_char_size_5)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(8, 'e');
+			mytree.remove(9);
+			char*array1data = new char[4];
+			array1data[0] = 'c';
+			array1data[1] = 'e';
+			array1data[2] = 'a';
+			array1data[3] = 'd';
+			size_t*array1key = new size_t[4];
+			array1key[0] = 12;
+			array1key[1] = 8;
+			array1key[2] = 13;
+			array1key[3] = 14;
+			char*array1color = new char[4];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			size_t i = 0;
+			char*array2data = new char[4];
+			size_t*array2key = new size_t[4];
+			char*array2color = new char[4];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 4, array2key, 4) && equal_arrays(array1color, 4, array2color, 4) && equal_arrays(array1data, 4, array2data, 4));
+		}
+		TEST_METHOD(remove_1_from_11_nodes_char)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			char*array1data = new char[10];
+			array1data[0] = 'c';
+			array1data[1] = 'b';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			array1data[7] = 'f';
+			array1data[8] = 'i';
+			array1data[9] = 'l';
+			size_t*array1key = new size_t[10];
+			array1key[0] = 12;
+			array1key[1] = 9;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11; 
+			array1key[5] = 13;
+			array1key[6] = 23;
+			array1key[7] = 7;
+			array1key[8] = 19;
+			array1key[9] = 6;
+			char*array1color = new char[10];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			array1color[7] = 'b';
+			array1color[8] = 'r';
+			array1color[9] = 'r';
+			size_t i = 0;
+			char*array2data = new char[10];
+			size_t*array2key = new size_t[10];
+			char*array2color = new char[10];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 10, array2key, 10) && equal_arrays(array1color, 10, array2color, 10) && equal_arrays(array1data, 10, array2data, 10));
+		}
+		TEST_METHOD(remove_2_from_11_nodes_char)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			char*array1data = new char[9];
+			array1data[0] = 'c';
+			array1data[1] = 'f';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			array1data[7] = 'l';
+			array1data[8] = 'i';
+			size_t*array1key = new size_t[9];
+			array1key[0] = 12;
+			array1key[1] = 7;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			array1key[6] = 23;
+			array1key[7] = 6;
+			array1key[8] = 19;
+			char*array1color = new char[9];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			array1color[7] = 'r';
+			array1color[8] = 'r';
+			size_t i = 0;
+			char*array2data = new char[9];
+			size_t*array2key = new size_t[9];
+			char*array2color = new char[9];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 9, array2key, 9) && equal_arrays(array1color, 9, array2color, 9) && equal_arrays(array1data, 9, array2data, 9));
+		}
+		TEST_METHOD(remove_3_from_11_nodes_char)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			char*array1data = new char[8];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			array1data[7] = 'i';
+			size_t*array1key = new size_t[8];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			array1key[6] = 23;
+			array1key[7] = 19;
+			char*array1color = new char[8];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			array1color[7] = 'r';
+			size_t i = 0;
+			char*array2data = new char[8];
+			size_t*array2key = new size_t[8];
+			char*array2color = new char[8];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 8, array2key, 8) && equal_arrays(array1color, 8, array2color, 8) && equal_arrays(array1data, 8, array2data, 8));
+		}
+		TEST_METHOD(remove_4_from_11_nodes_char)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			mytree.remove(19);
+			char*array1data = new char[7];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			array1data[6] = 'h';
+			size_t*array1key = new size_t[7];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			array1key[6] = 23;
+			char*array1color = new char[7];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			array1color[6] = 'b';
+			size_t i = 0;
+			char*array2data = new char[7];
+			size_t*array2key = new size_t[7];
+			char*array2color = new char[7];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 7, array2key, 7) && equal_arrays(array1color, 7, array2color, 7) && equal_arrays(array1data, 7, array2data, 7));
+		}
+		TEST_METHOD(remove_5_from_11_nodes_char)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			mytree.remove(19);
+			mytree.remove(23);
+			char*array1data = new char[6];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[2] = 'j';
+			array1data[4] = 'g';
+			array1data[5] = 'a';
+			size_t*array1key = new size_t[6];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 11;
+			array1key[5] = 13;
+			char*array1color = new char[6];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			array1color[5] = 'b';
+			size_t i = 0;
+			char*array2data = new char[6];
+			size_t*array2key = new size_t[6];
+			char*array2color = new char[6];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 6, array2key, 6) && equal_arrays(array1color, 6, array2color, 6) && equal_arrays(array1data, 6, array2data, 6));
+		}
+		TEST_METHOD(remove_6_from_11_nodes_char)
+		{
+			map<char> mytree;
+			mytree.insert(13, 'a');
+			mytree.insert(9, 'b');
+			mytree.insert(12, 'c');
+			mytree.insert(14, 'd');
+			mytree.insert(7, 'f');
+			mytree.insert(11, 'g');
+			mytree.insert(23, 'h');
+			mytree.insert(19, 'i');
+			mytree.insert(1, 'j');
+			mytree.insert(4, 'k');
+			mytree.insert(6, 'l');
+			mytree.remove(4);
+			mytree.remove(9);
+			mytree.remove(7);
+			mytree.remove(19);
+			mytree.remove(23);
+			mytree.remove(11);
+			char*array1data = new char[5];
+			array1data[0] = 'c';
+			array1data[1] = 'l';
+			array1data[2] = 'd';
+			array1data[3] = 'j';
+			array1data[4] = 'a';
+			size_t*array1key = new size_t[5];
+			array1key[0] = 12;
+			array1key[1] = 6;
+			array1key[2] = 14;
+			array1key[3] = 1;
+			array1key[4] = 13;
+			char*array1color = new char[5];
+			array1color[0] = 'b';
+			array1color[1] = 'b';
+			array1color[2] = 'b';
+			array1color[3] = 'r';
+			array1color[4] = 'b';
+			size_t i = 0;
+			char*array2data = new char[5];
+			size_t*array2key = new size_t[5];
+			char*array2color = new char[5];
+			for (Iterator<char> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 5, array2key, 5) && equal_arrays(array1color, 5, array2color, 5) && equal_arrays(array1data, 5, array2data, 5));
+		}
+		TEST_METHOD(finding_double_contains)
+		{
+			map<double> mytree;
+			mytree.insert(1, 5.2);
+			mytree.insert(2, 6.2);
+			mytree.insert(3, 7.2);
+			mytree.insert(4, 8.2);
 			int check;
-			list1.at(0, &data, &check);
-			Assert::AreEqual(data, 1);
+			double finded;
+			mytree.finding(&check, &finded, 3);
+			Assert::AreEqual(7.2, finded);
 		}
-		TEST_METHOD(at_int_meadle)
+		TEST_METHOD(finding_double_dont_contains)
 		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			int data;
+			map<double> mytree;
+			mytree.insert(1, 5.2);
+			mytree.insert(2, 6.2);
+			mytree.insert(3, 7.2);
+			mytree.insert(4, 8.2);
 			int check;
-			list1.at(1, &data, &check);
-			Assert::AreEqual(data, 2);
-		}
-		TEST_METHOD(at_int_tail)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			int data;
-			int check;
-			list1.at(2, &data, &check);
-			Assert::AreEqual(data, 3);
-		}
-		TEST_METHOD(at_int_out_of_range)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			int data;
-			int check;
-			list1.at(3, &data, &check);
-			Assert::AreEqual(check, -1);
-		}
-		TEST_METHOD(at_double_head)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			double data;
-			int check;
-			list1.at(0, &data, &check);
-			Assert::AreEqual(data, 1.7);
-		}
-		TEST_METHOD(at_double_meadle)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			double data;
-			int check;
-			list1.at(1, &data, &check);
-			Assert::AreEqual(data, 2.7);
-		}
-		TEST_METHOD(at_double_tail)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			double data;
-			int check;
-			list1.at(2, &data, &check);
-			Assert::AreEqual(data, 3.7);
-		}
-		TEST_METHOD(at_double_out_of_range)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			double data;
-			int check;
-			list1.at(3, &data, &check);
-			Assert::AreEqual(check, -1);
-		}
-		TEST_METHOD(at_char_head)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			char data;
-			int check;
-			list1.at(0, &data, &check);
-			Assert::AreEqual(data, 'a');
-		}
-		TEST_METHOD(at_char_meadle)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			char data;
-			int check;
-			list1.at(1, &data, &check);
-			Assert::AreEqual(data, 'b');
-		}
-		TEST_METHOD(at_char_tail)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			char data;
-			int check;
-			list1.at(2, &data, &check);
-			Assert::AreEqual(data, 'c');
-		}
-		TEST_METHOD(at_char_out_of_range)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			char data;
-			int check;
-			list1.at(3, &data, &check);
-			Assert::AreEqual(check, -1);
-		}
-		TEST_METHOD(equal_lists_int_size_0)
-		{
-			list<int> list1;
-			list<int> list2;
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(equal_lists_int_size_3)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.push_back(3);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(equal_lists_double_size_0)
-		{
-			list<double> list1;
-			list<double> list2;
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(equal_lists_double_size_3)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.push_back(3.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(equal_lists_char_size_0)
-		{
-			list<char> list1;
-			list<char> list2;
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(equal_lists_char_size_3)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.push_back('c');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_int_to_0)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list<int> list2;
-			list2.push_front(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_int_to_1)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list<int> list2;
-			list2.push_back(2);
-			list2.push_front(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_int_to_2)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			list<int> list2;
-			list2.push_back(2);
-			list2.push_back(3);
-			list2.push_front(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_double_to_0)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list<double> list2;
-			list2.push_front(1.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_double_to_1)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list<double> list2;
-			list2.push_back(2.7);
-			list2.push_front(1.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_double_to_2)
-		{
-			list<int> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			list<int> list2;
-			list2.push_back(2.7);
-			list2.push_back(3.7);
-			list2.push_front(1.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_char_to_0)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list<char> list2;
-			list2.push_front('a');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_char_to_1)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list<char> list2;
-			list2.push_back('b');
-			list2.push_front('a');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(push_front_char_to_2)
-		{
-			list<int> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			list<int> list2;
-			list2.push_back('b');
-			list2.push_back('c');
-			list2.push_front('a');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_int_from_0)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_int_from_1)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.push_back(1);
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_int_from_2)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_double_from_0)
-		{
-			list<double> list1;
-			list<double> list2;
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_double_from_1)
-		{
-			list<double> list1;
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_double_from_2)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_char_from_0)
-		{
-			list<char> list1;
-			list<char> list2;
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_char_from_1)
-		{
-			list<char> list1;
-			list<char> list2;
-			list2.push_back('a');
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_back_char_from_2)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.pop_back();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_int_from_0)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_int_from_1)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.push_back(1);
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_int_from_2)
-		{
-			list<int> list1;
-			list1.push_back(2);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_double_from_0)
-		{
-			list<double> list1;
-			list<double> list2;
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_double_from_1)
-		{
-			list<double> list1;
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_double_from_2)
-		{
-			list<double> list1;
-			list1.push_back(2.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_char_from_0)
-		{
-			list<char> list1;
-			list<char> list2;
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_char_from_1)
-		{
-			list<char> list1;
-			list<char> list2;
-			list2.push_back('a');
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(pop_front_char_from_2)
-		{
-			list<char> list1;
-			list1.push_back('b');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.pop_front();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_int_index_0)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list<int> list2;
-			list2.push_back(2);
-			list2.insert(0, 1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_int_middle)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(2);
-			list1.push_back(3);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(3);
-			list2.insert(1, 2);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_int_out_of_range)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list<int> list2;
-			list2.push_back(1);
-			list2.insert(1, 2);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_double_index_0)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list<double> list2;
-			list2.push_back(2.7);
-			list2.insert(0, 1.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_double_middle)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(2.7);
-			list1.push_back(3.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(3.7);
-			list2.insert(1, 2.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_double_out_of_range)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.insert(1, 2.7);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_char_index_0)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list<char> list2;
-			list2.push_back('b');
-			list2.insert(0, 'a');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_char_middle)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('b');
-			list1.push_back('c');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('c');
-			list2.insert(1, 'b');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(insert_char_out_of_range)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list<char> list2;
-			list2.push_back('a');
-			list2.insert(1, 'b');
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_int_index_0)
-		{
-			list<int> list1;
-			list1.push_back(2);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.remove(0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_int_index_size_sub_1)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.remove(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_int_middle)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list1.push_back(3);
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.push_back(3);
-			list2.remove(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_int_out_of_range)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.remove(0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_double_index_0)
-		{
-			list<double> list1;
-			list1.push_back(2.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.remove(0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_double_index_size_sub_1)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.remove(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_double_middle)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list1.push_back(3.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.push_back(3.7);
-			list2.remove(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_double_out_of_range)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.remove(0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_char_index_0)
-		{
-			list<char> list1;
-			list1.push_back('b');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.remove(0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_char_index_size_sub_1)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.remove(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_char_middle)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list1.push_back('c');
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.push_back('c');
-			list2.remove(1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(remove_char_out_of_range)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.remove(0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(clear_int_size_0)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.clear();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(clear_int_size_3)
-		{
-			list<int> list1;
-			list<int> list2;
-			list2.push_back(1);
-			list2.push_back(2);
-			list2.push_back(3);
-			list2.clear();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(clear_double_size_0)
-		{
-			list<double> list1;
-			list<double> list2;
-			list2.clear();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(clear_double_size_3)
-		{
-			list<double> list1;
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.push_back(2.7);
-			list2.push_back(3.7);
-			list2.clear();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(clear_char_size_0)
-		{
-			list<char> list1;
-			list<char> list2;
-			list2.clear();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(clear_char_size_3)
-		{
-			list<char> list1;
-			list<char> list2;
-			list2.push_back('a');
-			list2.push_back('b');
-			list2.push_back('c');
-			list2.clear();
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(set_int_middle)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list<int> list2;
-			list2.push_back(2);
-			list2.set(1, 0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(set_int_out_of_range)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			list<int> list2;
-			list2.push_back(1);
-			list2.set(2, 1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(set_double_middle)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list<double> list2;
-			list2.push_back(2.7);
-			list2.set(1.7, 0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(set_double_out_of_range)
-		{
-			list<double> list1;
-			list1.push_back(1.7);
-			list<double> list2;
-			list2.push_back(1.7);
-			list2.set(2.7, 1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(set_char_middle)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list<char> list2;
-			list2.push_back('b');
-			list2.set('a', 0);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(set_char_out_of_range)
-		{
-			list<char> list1;
-			list1.push_back('a');
-			list<char> list2;
-			list2.push_back('a');
-			list2.set('b', 1);
-			Assert::IsTrue(equal_lists(list1, list2));
-		}
-		TEST_METHOD(is_empty_int_empty)
-		{
-			list<int> list1;
-			int check;
-			list1.is_empty(&check);
-			Assert::AreEqual(1, check);
-		}
-		TEST_METHOD(is_empty_int_isnt_empty)
-		{
-			list<int> list1;
-			list1.push_back(1);
-			int check;
-			list1.is_empty(&check);
+			double finded;
+			mytree.finding(&check, &finded, 5);
 			Assert::AreEqual(-1, check);
 		}
-		TEST_METHOD(is_empty_double_empty)
+		TEST_METHOD(clear_double)
 		{
-			list<double> list1;
-			int check;
-			list1.is_empty(&check);
-			Assert::AreEqual(1, check);
+			map<double> mytree;
+			mytree.insert(1, 5.2);
+			mytree.insert(2, 6.2);
+			mytree.insert(3, 7.2);
+			mytree.insert(4, 8.2);
+			mytree.clear();
+			double*array1data = new double[0];
+			double*array2data = new double[0];
+			char*array1color = new char[0];
+			char*array2color = new char[0];
+			size_t i = 0;
+			size_t*array1key = new size_t[0];
+			size_t*array2key = new size_t[0];
+			for (Iterator<double> *tmp = mytree.createBfsIterator(); tmp->hasNext(); tmp->next())
+				if (tmp->current_color() != 'n')
+				{
+					array2data[i] = tmp->current_data();
+					array2key[i] = tmp->current_key();
+					array2color[i] = tmp->current_color();
+					i++;
+				}
+			Assert::IsTrue(equal_arrays(array1key, 0, array2key, 0) && equal_arrays(array1color, 0, array2color, 0) && equal_arrays(array1data, 0, array2data, 0));
 		}
-		TEST_METHOD(is_empty_double_isnt_empty)
+		TEST_METHOD(get_keys_int)
 		{
-			list<double> list1;
-			list1.push_back(1.7);
-			int check;
-			list1.is_empty(&check);
-			Assert::AreEqual(-1, check);
+			map<int> mytree;
+			mytree.insert(13, 13);
+			mytree.insert(9, 9);
+			mytree.insert(15, 15);
+			mytree.insert(8, 8);
+			mytree.insert(10, 10);
+			mytree.insert(12, 12);
+			mytree.insert(11, 11);
+			list<size_t> list1 = mytree.get_keys();
+			list<size_t> list2;
+			list2.push_back(13);
+			list2.push_back(9);
+			list2.push_back(15);
+			list2.push_back(8);
+			list2.push_back(11);
+			list2.push_back(10);
+			list2.push_back(12);
+			Assert::IsTrue(equal_lsits(list1, list2));
 		}
-		TEST_METHOD(is_empty_char_empty)
+		TEST_METHOD(get_values_int)
 		{
-			list<char> list1;
-			int check;
-			list1.is_empty(&check);
-			Assert::AreEqual(1, check);
-		}
-		TEST_METHOD(is_empty_char_isnt_empty)
-		{
-			list<int> list1;
-			list1.push_back('a');
-			int check;
-			list1.is_empty(&check);
-			Assert::AreEqual(-1, check);
+			map<int> mytree;
+			mytree.insert(13, 15);
+			mytree.insert(9, 11);
+			mytree.insert(15, 17);
+			mytree.insert(8, 10);
+			mytree.insert(10, 12);
+			mytree.insert(12, 14);
+			mytree.insert(11, 13);
+			list<int> list1 = mytree.get_values();
+			list<int> list2;
+			list2.push_back(15);
+			list2.push_back(11);
+			list2.push_back(17);
+			list2.push_back(10);
+			list2.push_back(13);
+			list2.push_back(12);
+			list2.push_back(14);
+			Assert::IsTrue(equal_lsits(list1, list2));
 		}
 	};
 }
