@@ -1,0 +1,6 @@
+﻿  stdafx.cpp
+  tests.cpp
+c:\users\senny\source\repos\lab2\tests\tests.cpp(1255): error C2535: const Microsoft::VisualStudio::CppUnitTestFramework::MemberMethodInfo *UnitTest1::UnitTest1::__GetTestMethodInfo_remove_6_from_11_nodes_char(void): функция-член уже определена или объявлена
+  c:\users\senny\source\repos\lab2\tests\tests.cpp(1151): note:  см. объявление "UnitTest1::UnitTest1::__GetTestMethodInfo_remove_6_from_11_nodes_char"
+c:\users\senny\source\repos\lab2\tests\tests.cpp(1257): error C2535: void UnitTest1::UnitTest1::remove_6_from_11_nodes_char(void): функция-член уже определена или объявлена
+  c:\users\senny\source\repos\lab2\tests\tests.cpp(1151): note:  см. объявление "UnitTest1::UnitTest1::remove_6_from_11_nodes_char"

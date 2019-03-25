@@ -1,0 +1,21 @@
+﻿  pch.cpp
+  lab2.cpp
+c:\users\senny\source\repos\lab2\lab2\map.h(259): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+  c:\users\senny\source\repos\lab2\lab2\map.h(250): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\senny\source\repos\lab2\lab2\lab2.cpp(11): note: выполняется компиляция ссылки на экземпляр шаблон функции "void map<char>::insert(size_t,T)"
+          with
+          [
+              T=char
+          ]
+  c:\users\senny\source\repos\lab2\lab2\lab2.cpp(10): note: выполняется компиляция ссылки на экземпляр шаблон класс "map<char>"
+c:\users\senny\source\repos\lab2\lab2\map.h(552): warning C4101: child: неиспользованная локальная переменная
+  c:\users\senny\source\repos\lab2\lab2\map.h(550): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\senny\source\repos\lab2\lab2\lab2.cpp(22): note: выполняется компиляция ссылки на экземпляр шаблон функции "void map<char>::remove(size_t)"
+c:\users\senny\source\repos\lab2\lab2\map.h(352): warning C4101: ex: неиспользованная локальная переменная
+  c:\users\senny\source\repos\lab2\lab2\map.h(345): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\senny\source\repos\lab2\lab2\map.h(555): note: выполняется компиляция ссылки на экземпляр шаблон функции "bool map<char>::contains(size_t)"
+  c:\users\senny\source\repos\lab2\lab2\map.h(162): note: при компиляции функции-члена "<Нет данных>" класса класс <Нет данных>
+  c:\users\senny\source\repos\lab2\lab2\lab2.cpp(10): note: выполняется компиляция ссылки на экземпляр шаблон функции "map<char>::map(void)"
+  queue.cpp
+  Создание кода...
+  lab2.vcxproj -> C:\Users\senny\source\repos\lab2\Debug\lab2.lib
