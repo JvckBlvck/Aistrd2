@@ -37,7 +37,8 @@ private:
 	void remove_case_brother_is_black_and_cur_is_left_and_brothers_right_is_black_and_brothers_left_is_black_or_cur_is_right_and_brothers_left_is_black_and_brothers_right_is_red(node*cur);
 	void remove_case_cur_is_left_and_brother_is_black_and_brothers_right_is_red_or_cur_is_right_and_brother_is_black_and_brothers_left_is_red(node*cur);
 	void replace_node(node*cur, node*child);
-	
+	bool contains(size_t key);
+	void remove_one_child(node*cur);
 public:
 	map();
 	~map();
@@ -58,8 +59,6 @@ public:
 	Iterator<T> *createBfsIterator();
 	void insert(size_t ket, T data);
 	void find(int*check, T*finded, size_t key);
-	bool contains(size_t key);
-	void remove_one_child(node*cur);
 	void remove(size_t key);
 	void clear();
 	list<size_t> get_keys();
